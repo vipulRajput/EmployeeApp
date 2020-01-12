@@ -21,22 +21,32 @@ class EmployeeViewModel {
         do {
             
             let employeesData = try managedContext.fetch(fetchRequest)
+            
+            let group = DispatchGroup()
+            group.enter()
+            
             var empArr = [Employee]()
             
-            _ = employeesData.map({ (employeeEntity) in
+            DispatchQueue.main.async {
                 
-                var employeeModel = Employee()
+                empArr = employeesData.map({ (employeeEntity) -> Employee in
+                    
+                    var employeeModel = Employee()
+                    employeeModel.name = employeeEntity.value(forKey: "name") as? String ?? ""
+                    employeeModel.emailId = employeeEntity.value(forKey: "emailId") as? String ?? ""
+                    employeeModel.city = employeeEntity.value(forKey: "city") as? String ?? ""
+                    employeeModel.isMarried = employeeEntity.value(forKey: "isMarried") as? Bool ?? false
+                    employeeModel.anniversary = employeeEntity.value(forKey: "anniversary") as? String ?? ""
+                    return employeeModel
+                })
                 
-                employeeModel.name = employeeEntity.value(forKey: "name") as? String ?? ""
-                employeeModel.emailId = employeeEntity.value(forKey: "emailId") as? String ?? ""
-                employeeModel.city = employeeEntity.value(forKey: "city") as? String ?? ""
-                employeeModel.isMarried = employeeEntity.value(forKey: "isMarried") as? Bool ?? false
-                employeeModel.anniversary = employeeEntity.value(forKey: "anniversary") as? String ?? ""
-                
-                print(employeeEntity.value(forKey: "name") as? String ?? "")
-                empArr.append(employeeModel)
-            })
-            self.employees.onNext(empArr)
+                group.leave()
+            }
+            
+            group.notify(queue: .main) {
+                self.employees.onNext(empArr)
+            }
+
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }

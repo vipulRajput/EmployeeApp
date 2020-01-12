@@ -19,7 +19,6 @@ target 'EmployeeApp' do
 
 
 pod 'RxSwift'
-pod 'lottie-ios'
 
 
 end

@@ -21,12 +21,14 @@ class EmployeesListVC: UIViewController {
         super.viewDidLoad()
         
         self.initialSetup()
-    }    
+    }
 }
 
 extension EmployeesListVC {
     
     fileprivate func initialSetup() {
+        
+        self.observeViewModelChanges()
         
         self.title = "Employee List"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addEmployee))
@@ -37,7 +39,6 @@ extension EmployeesListVC {
         self.employeeListTableView.dataSource = self
         self.employeeListTableView.delegate = self
         
-        self.observeViewModelChanges()
         self.employeeVM.getEmployees()
     }
     
@@ -47,6 +48,9 @@ extension EmployeesListVC {
             .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { (employees) in
+                
+                print("on next")
+                
                 self.employeeList.append(contentsOf: employees)
                 self.employeeListTableView.reloadData()
             }, onError: nil, onCompleted: nil, onDisposed: nil)
