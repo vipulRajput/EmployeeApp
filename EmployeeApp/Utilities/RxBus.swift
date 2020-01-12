@@ -15,5 +15,9 @@ class RxBus: NSObject {
     
     private override init() { }
 
-    var empAdded = BehaviorSubject<Employee>(value: Employee())
+    var empAdded = PublishSubject<Employee>()
+    var empUpdateClicked = PublishSubject<Employee>()
+    var empUpdated = PublishSubject<Employee>()
+    var empDeletedIndex = PublishSubject<Int>()
+    var selectedCity = PublishSubject<String>()
 }

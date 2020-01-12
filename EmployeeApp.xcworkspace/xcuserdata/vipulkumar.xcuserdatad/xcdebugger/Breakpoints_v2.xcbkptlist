@@ -2,4 +2,54 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EmployeeApp/ViewModels/EmployeeViewModel.swift"
+            timestampString = "600543366.699895"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "updateEmployee(employee:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EmployeeApp.EmployeeViewModel.updateEmployee(employee: EmployeeApp.Employee) -&gt; ()"
+                  moduleName = "EmployeeApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vipulkumar/Desktop/Testing/Practice/EmployeeApp/EmployeeApp/ViewModels/EmployeeViewModel.swift"
+                  timestampString = "600543157.035683"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "397">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (EmployeeApp.EmployeeEntity) -&gt; Swift.Bool in EmployeeApp.EmployeeViewModel.updateEmployee(employee: EmployeeApp.Employee) -&gt; ()"
+                  moduleName = "EmployeeApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vipulkumar/Desktop/Testing/Practice/EmployeeApp/EmployeeApp/ViewModels/EmployeeViewModel.swift"
+                  timestampString = "600543157.0415241"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "108">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

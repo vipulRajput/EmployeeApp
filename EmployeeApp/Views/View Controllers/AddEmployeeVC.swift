@@ -19,9 +19,9 @@ class AddEmployeeVC: UIViewController {
     
     let datePicker = UIDatePicker()
     var addEmployeeVCSetup: AddEmployeeVCSetup = .AddEmployee
-    var isMarried = false
     let cities: [String] = ["Delhi", "Bengaluru", "Hyderabad", "Mumbai", "Pune", "Kolkata"]
-    var enterdInfo = [String:String]()
+    let disposeBag = DisposeBag()
+    var currentEmployee = Employee()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,14 +32,19 @@ class AddEmployeeVC: UIViewController {
     @IBAction func addEmployeeBtnTapped(_ sender: UIButton) {
         
         var employeeModel = Employee()
+        employeeModel.name = self.currentEmployee.name
+        employeeModel.emailId = self.currentEmployee.emailId
+        employeeModel.city = self.currentEmployee.city
+        employeeModel.isMarried = self.currentEmployee.isMarried
+        employeeModel.anniversary = self.currentEmployee.anniversary
         
-        employeeModel.name = self.enterdInfo["name"] ?? ""
-        employeeModel.emailId = self.enterdInfo["emailId"] ?? ""
-        employeeModel.city = self.enterdInfo["city"] ?? ""
-        employeeModel.isMarried = self.isMarried
-        employeeModel.anniversary = self.enterdInfo["anniversary"] ?? ""
+        self.navigationController?.popViewController(animated: true)
         
-        RxBus.shared.empAdded.onNext(employeeModel)
+        if self.isEditing {
+            RxBus.shared.empUpdateClicked.onNext(employeeModel)
+        } else {
+            RxBus.shared.empAdded.onNext(employeeModel)
+        }
     }
 }
 
@@ -56,6 +61,16 @@ extension AddEmployeeVC {
         self.addEmployeeTableView.register(UINib(nibName: "EnterDetailsTableCell", bundle: nil), forCellReuseIdentifier: "EnterDetailsTableCell")
         self.addEmployeeTableView.dataSource = self
         self.addEmployeeTableView.delegate = self
+        
+        self.observeCityChanges()
+    }
+    
+    fileprivate func observeCityChanges() {
+        
+        RxBus.shared.selectedCity.subscribe { (selectedCity) in
+            self.currentEmployee.city = selectedCity.element ?? ""
+            self.addEmployeeTableView.reloadData()
+        }.disposed(by: self.disposeBag)
     }
     
     @objc fileprivate func topicNameTextFieldEditingChanged(_ sender: UITextField) {
@@ -65,19 +80,18 @@ extension AddEmployeeVC {
         }
         
         switch indexPath.row {
-            
         case 1:
-            self.enterdInfo["emailId"] = sender.text ?? ""
+            self.currentEmployee.emailId = sender.text ?? ""
         case 2:
-            self.enterdInfo["city"] = sender.text ?? ""
+            self.currentEmployee.city = sender.text ?? ""
         default:
-            self.enterdInfo["name"] = sender.text ?? ""
+            self.currentEmployee.name = sender.text ?? ""
         }
     }
     
     @objc fileprivate func marriageStatusChanging(_ sender: UISwitch) {
         
-        self.isMarried = sender.isOn
+        self.currentEmployee.isMarried = sender.isOn
         self.addEmployeeTableView.reloadData()
     }
     
@@ -85,10 +99,7 @@ extension AddEmployeeVC {
         
         let formatter = DateFormatter()
         formatter.dateFormat = "dd-MM-yyyy"
-        print(formatter.string(from: self.datePicker.date))
-        
-        self.enterdInfo["anniversary"] = formatter.string(from: self.datePicker.date)
-        
+        self.currentEmployee.anniversary = formatter.string(from: self.datePicker.date)
         self.view.endEditing(true)
         self.addEmployeeTableView.reloadData()
     }
@@ -107,7 +118,7 @@ extension AddEmployeeVC {
         }
         
         if self.addEmployeeVCSetup == .AddEmployee {
-            cell.setupCell(row: indexPath.row, marriageStatusTrue: self.isMarried, empInfo: self.enterdInfo)
+            cell.setupCell(row: indexPath.row, employee: self.currentEmployee)
         } else {
             cell.setupCellFor(city: self.cities[indexPath.row])
         }
@@ -158,13 +169,11 @@ extension AddEmployeeVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if self.addEmployeeVCSetup == .AddEmployee {
- 
-        } else {
+        if self.addEmployeeVCSetup == .SelectCity {
+            RxBus.shared.selectedCity.onNext(self.cities[indexPath.row])
             self.dismiss(animated: true, completion: nil)
         }
         
-        // deselect
         tableView.deselectRow(at: indexPath, animated: false)
     }
 }

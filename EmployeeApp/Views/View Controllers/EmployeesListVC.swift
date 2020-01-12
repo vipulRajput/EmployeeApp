@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 
 class EmployeesListVC: UIViewController {
-
+    
     @IBOutlet weak var employeeListTableView: UITableView!
     
     let disposeBag = DisposeBag()
@@ -19,11 +19,9 @@ class EmployeesListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.initialSetup()
-    }
-    
-    
+    }    
 }
 
 extension EmployeesListVC {
@@ -40,36 +38,58 @@ extension EmployeesListVC {
         self.employeeListTableView.delegate = self
         
         self.observeViewModelChanges()
+        self.employeeVM.getEmployees()
     }
     
     fileprivate func observeViewModelChanges() {
         
         self.employeeVM.employees
-        .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
-        .observeOn(MainScheduler.instance)
+            .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: { (employees) in
-                
-                print("on Next\n")
-                print(employees)
-                
-            }, onError: { (error) in
-                print(error.localizedDescription)
-            }, onCompleted: nil, onDisposed: nil)
-        .disposed(by: self.disposeBag)
+                self.employeeList.append(contentsOf: employees)
+                self.employeeListTableView.reloadData()
+            }, onError: nil, onCompleted: nil, onDisposed: nil)
+            .disposed(by: self.disposeBag)
         
         RxBus.shared.empAdded
             .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { (employee) in
-                
-                print("on Next\n")
-                print("employee added")
-                
-            }, onError: { (error) in
-                print(error.localizedDescription)
-            }, onCompleted: nil, onDisposed: nil)
+                self.employeeVM.addEmployee(employee: employee)
+            }, onError: nil, onCompleted: nil, onDisposed: nil)
             .disposed(by: self.disposeBag)
         
+        RxBus.shared.empUpdateClicked
+            .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { (employeeToUpdate) in
+                self.employeeVM.updateEmployee(employee: employeeToUpdate)
+            }, onError: nil, onCompleted: nil, onDisposed: nil)
+            .disposed(by: self.disposeBag)
+        
+        RxBus.shared.empUpdated
+            .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { (updatedEmployee) in
+                self.employeeList = self.employeeList.map({ (employee) -> Employee in
+                    if updatedEmployee.emailId == employee.emailId {
+                        return updatedEmployee
+                    } else {
+                        return employee
+                    }
+                })
+                self.employeeListTableView.reloadData()
+            }, onError: nil, onCompleted: nil, onDisposed: nil)
+            .disposed(by: self.disposeBag)
+        
+        RxBus.shared.empDeletedIndex.subscribeOn(SerialDispatchQueueScheduler(qos: .background))
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { (index) in
+                self.employeeList.remove(at: index)
+                self.employeeListTableView.reloadData()
+            }, onError: nil, onCompleted: nil, onDisposed: nil)
+            .disposed(by: self.disposeBag)
     }
     
     @objc fileprivate func addEmployee(_ sender: UIBarButtonItem) {
@@ -87,6 +107,9 @@ extension EmployeesListVC {
             fatalError("EmployeeTableCell not found!")
         }
         
+        cell.nameLabel.text = self.employeeList[indexPath.row].name
+        cell.emailLabel.text = self.employeeList[indexPath.row].emailId
+        
         return cell
     }
 }
@@ -94,7 +117,7 @@ extension EmployeesListVC {
 extension EmployeesListVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.employeeList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -107,5 +130,23 @@ extension EmployeesListVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let obj = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddEmployeeVC") as! AddEmployeeVC
+        obj.currentEmployee = self.employeeList[indexPath.row]
+        obj.isEditing = true
+        self.navigationController?.pushViewController(obj, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
+            self.employeeVM.deleteEmployeeOf(index: indexPath.row)
+        }
+        
+        deleteAction.backgroundColor = UIColor.red
+        return [deleteAction]
     }
 }
