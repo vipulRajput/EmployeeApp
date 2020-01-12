@@ -1,0 +1,19 @@
+//
+//  RxBus.swift
+//  EmployeeApp
+//
+//  Created by Vipul Kumar on 12/01/20.
+//  Copyright © 2020 Vipul Kumar. All rights reserved.
+//
+
+import Foundation
+import RxSwift
+
+class RxBus: NSObject {
+    
+    static let shared = RxBus()
+    
+    private override init() { }
+
+    var empAdded = BehaviorSubject<Employee>(value: Employee())
+}
