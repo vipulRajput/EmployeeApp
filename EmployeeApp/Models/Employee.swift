@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+class Employee {
+    
+    var name: String = ""
+    var emailId: String = ""
+    var city: String = ""
+    var isMarried: Bool = false
+    var dateOfBirth: String = ""
+}
