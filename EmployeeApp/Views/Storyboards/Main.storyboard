@@ -77,6 +77,7 @@
                         <viewLayoutGuide key="safeArea" id="nOE-cK-l8L"/>
                     </view>
                     <connections>
+                        <outlet property="addEmployeeBtn" destination="bl6-VD-Oak" id="inR-DO-PWl"/>
                         <outlet property="addEmployeeTableView" destination="arj-6t-fhQ" id="Yyh-Yb-6Wm"/>
                     </connections>
                 </viewController>

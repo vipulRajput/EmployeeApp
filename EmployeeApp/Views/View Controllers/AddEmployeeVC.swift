@@ -16,6 +16,7 @@ class AddEmployeeVC: UIViewController {
     }
     
     @IBOutlet weak var addEmployeeTableView: UITableView!
+    @IBOutlet weak var addEmployeeBtn: UIButton!
     
     let datePicker = UIDatePicker()
     var addEmployeeVCSetup: AddEmployeeVCSetup = .AddEmployee
@@ -30,21 +31,8 @@ class AddEmployeeVC: UIViewController {
     }
     
     @IBAction func addEmployeeBtnTapped(_ sender: UIButton) {
-        
-        var employeeModel = Employee()
-        employeeModel.name = self.currentEmployee.name
-        employeeModel.emailId = self.currentEmployee.emailId
-        employeeModel.city = self.currentEmployee.city
-        employeeModel.isMarried = self.currentEmployee.isMarried
-        employeeModel.anniversary = self.currentEmployee.anniversary
-        
-        self.navigationController?.popViewController(animated: true)
-        
-        if self.isEditing {
-            RxBus.shared.empUpdateClicked.onNext(employeeModel)
-        } else {
-            RxBus.shared.empAdded.onNext(employeeModel)
-        }
+     
+        self.addUpdateEmployee()
     }
 }
 
@@ -53,6 +41,8 @@ extension AddEmployeeVC {
     fileprivate func initialSetup() {
         
         self.title = self.addEmployeeVCSetup == .AddEmployee ? "Add Employee" : "Select City"
+        self.addEmployeeBtn.isHidden = self.addEmployeeVCSetup == .SelectCity
+        self.addEmployeeBtn.setTitle(self.isEditing ? "UPDATE EMPLOYEE" : "ADD EMPLOYEE", for: .normal)
         
         self.datePicker.datePickerMode = .date
         self.datePicker.setDate(Date(), animated: false)
@@ -71,6 +61,49 @@ extension AddEmployeeVC {
             self.currentEmployee.city = selectedCity.element ?? ""
             self.addEmployeeTableView.reloadData()
         }.disposed(by: self.disposeBag)
+    }
+    
+    fileprivate func addUpdateEmployee() {
+        
+        if self.currentEmployee.name.isEmpty {
+            self.showAlertWithOkBtn(msg: "Please enter name!")
+        } else if self.currentEmployee.emailId.isEmpty {
+            self.showAlertWithOkBtn(msg: "Please enter email-id!")
+        } else if self.currentEmployee.city.isEmpty {
+            self.showAlertWithOkBtn(msg: "Please enter city!")
+        } else if self.currentEmployee.isMarried, self.currentEmployee.anniversary.isEmpty {
+            self.showAlertWithOkBtn(msg: "Please enter anniversary!")
+        } else {
+            
+            var employeeModel = Employee()
+            employeeModel.name = self.currentEmployee.name
+            employeeModel.emailId = self.currentEmployee.emailId
+            employeeModel.city = self.currentEmployee.city
+            employeeModel.isMarried = self.currentEmployee.isMarried
+            employeeModel.anniversary = self.currentEmployee.anniversary
+            
+            self.navigationController?.popViewController(animated: true)
+            
+            if self.isEditing {
+                RxBus.shared.empUpdateClicked.onNext(employeeModel)
+            } else {
+                RxBus.shared.empAdded.onNext(employeeModel)
+            }
+        }
+    }
+    
+    func showAlertWithOkBtn(title : String = "", msg : String, okBtnTitle: String = "Ok", _ completion : (()->())? = nil){
+        
+        let alertViewController = UIAlertController(title: title, message: msg, preferredStyle: UIAlertController.Style.alert)
+        let okAction = UIAlertAction(title: okBtnTitle, style: UIAlertAction.Style.default) { (action : UIAlertAction) -> Void in
+            
+            alertViewController.dismiss(animated: true, completion: nil)
+            completion?()
+        }
+        
+        alertViewController.addAction(okAction)
+        alertViewController.preferredAction = okAction
+        self.present(alertViewController, animated: true, completion: nil)
     }
     
     @objc fileprivate func topicNameTextFieldEditingChanged(_ sender: UITextField) {
