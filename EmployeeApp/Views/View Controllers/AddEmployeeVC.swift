@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class AddEmployeeVC: UIViewController {
 
@@ -20,11 +21,25 @@ class AddEmployeeVC: UIViewController {
     var addEmployeeVCSetup: AddEmployeeVCSetup = .AddEmployee
     var isMarried = false
     let cities: [String] = ["Delhi", "Bengaluru", "Hyderabad", "Mumbai", "Pune", "Kolkata"]
+    var enterdInfo = [String:String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.initialSetup()
+    }
+    
+    @IBAction func addEmployeeBtnTapped(_ sender: UIButton) {
+        
+        var employeeModel = Employee()
+        
+        employeeModel.name = self.enterdInfo["name"] ?? ""
+        employeeModel.emailId = self.enterdInfo["emailId"] ?? ""
+        employeeModel.city = self.enterdInfo["city"] ?? ""
+        employeeModel.isMarried = self.isMarried
+        employeeModel.anniversary = self.enterdInfo["anniversary"] ?? ""
+        
+        RxBus.shared.empAdded.onNext(employeeModel)
     }
 }
 
@@ -49,7 +64,15 @@ extension AddEmployeeVC {
             return
         }
         
-        
+        switch indexPath.row {
+            
+        case 1:
+            self.enterdInfo["emailId"] = sender.text ?? ""
+        case 2:
+            self.enterdInfo["city"] = sender.text ?? ""
+        default:
+            self.enterdInfo["name"] = sender.text ?? ""
+        }
     }
     
     @objc fileprivate func marriageStatusChanging(_ sender: UISwitch) {
@@ -63,6 +86,8 @@ extension AddEmployeeVC {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd-MM-yyyy"
         print(formatter.string(from: self.datePicker.date))
+        
+        self.enterdInfo["anniversary"] = formatter.string(from: self.datePicker.date)
         
         self.view.endEditing(true)
         self.addEmployeeTableView.reloadData()
@@ -82,7 +107,7 @@ extension AddEmployeeVC {
         }
         
         if self.addEmployeeVCSetup == .AddEmployee {
-            cell.setupCell(row: indexPath.row, marriageStatusTrue: self.isMarried)
+            cell.setupCell(row: indexPath.row, marriageStatusTrue: self.isMarried, empInfo: self.enterdInfo)
         } else {
             cell.setupCellFor(city: self.cities[indexPath.row])
         }

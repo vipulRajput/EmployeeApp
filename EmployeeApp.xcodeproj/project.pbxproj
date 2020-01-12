@@ -9,10 +9,20 @@
 /* Begin PBXBuildFile section */
 		45D2355257E9AC24904431ED /* Pods_EmployeeAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D3643CE19138B703A10BC1A /* Pods_EmployeeAppUITests.framework */; };
 		C19AAE5723CAEE6F00538EF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19AAE5623CAEE6F00538EF5 /* AppDelegate.swift */; };
-		C19AAE5C23CAEE6F00538EF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C19AAE5A23CAEE6F00538EF5 /* Main.storyboard */; };
 		C19AAE5F23CAEE6F00538EF5 /* EmployeeApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C19AAE5D23CAEE6F00538EF5 /* EmployeeApp.xcdatamodeld */; };
 		C19AAE6123CAEE7100538EF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C19AAE6023CAEE7100538EF5 /* Assets.xcassets */; };
-		C19AAE6423CAEE7100538EF5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C19AAE6223CAEE7100538EF5 /* LaunchScreen.storyboard */; };
+		C1C1AE5023CB28BF00F984FE /* RxBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C1AE4F23CB28BF00F984FE /* RxBus.swift */; };
+		C1FCE56F23CAFB3100DA0C57 /* EnterDetailsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FCE56D23CAFB3100DA0C57 /* EnterDetailsTableCell.swift */; };
+		C1FCE57023CAFB3100DA0C57 /* EnterDetailsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1FCE56E23CAFB3100DA0C57 /* EnterDetailsTableCell.xib */; };
+		C1FCE57823CB043C00DA0C57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1FCE57623CB043C00DA0C57 /* LaunchScreen.storyboard */; };
+		C1FCE57923CB043C00DA0C57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1FCE57723CB043C00DA0C57 /* Main.storyboard */; };
+		C1FCE57C23CB04C400DA0C57 /* EmployeesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FCE57B23CB04C400DA0C57 /* EmployeesListVC.swift */; };
+		C1FCE57E23CB04F900DA0C57 /* AddEmployeeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FCE57D23CB04F900DA0C57 /* AddEmployeeVC.swift */; };
+		C1FCE58123CB145A00DA0C57 /* EmployeeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FCE57F23CB145A00DA0C57 /* EmployeeTableCell.swift */; };
+		C1FCE58223CB145A00DA0C57 /* EmployeeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1FCE58023CB145A00DA0C57 /* EmployeeTableCell.xib */; };
+		C1FCE58523CB171000DA0C57 /* UiViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FCE58423CB170F00DA0C57 /* UiViewExtension.swift */; };
+		C1FCE58723CB1ED100DA0C57 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FCE58623CB1ED100DA0C57 /* Employee.swift */; };
+		C1FCE58923CB1FF800DA0C57 /* EmployeeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FCE58823CB1FF800DA0C57 /* EmployeeViewModel.swift */; };
 		D1CBC3C754276B9B8DD1B340 /* Pods_EmployeeAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80DEC3D4D55042012E8111F3 /* Pods_EmployeeAppTests.framework */; };
 		E23A4D353C9769590E9B29E8 /* Pods_EmployeeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8B8C172F3C6789429AEC3A /* Pods_EmployeeApp.framework */; };
 /* End PBXBuildFile section */
@@ -45,13 +55,23 @@
 		946628DA651BF0B62CBA22C3 /* Pods-EmployeeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmployeeApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-EmployeeApp/Pods-EmployeeApp.release.xcconfig"; sourceTree = "<group>"; };
 		C19AAE5323CAEE6F00538EF5 /* EmployeeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmployeeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19AAE5623CAEE6F00538EF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C19AAE5B23CAEE6F00538EF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C19AAE5E23CAEE6F00538EF5 /* EmployeeApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EmployeeApp.xcdatamodel; sourceTree = "<group>"; };
 		C19AAE6023CAEE7100538EF5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C19AAE6323CAEE7100538EF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C19AAE6523CAEE7100538EF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C19AAE6A23CAEE7100538EF5 /* EmployeeAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmployeeAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19AAE7523CAEE7100538EF5 /* EmployeeAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmployeeAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1C1AE4F23CB28BF00F984FE /* RxBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxBus.swift; sourceTree = "<group>"; };
+		C1FCE56D23CAFB3100DA0C57 /* EnterDetailsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterDetailsTableCell.swift; sourceTree = "<group>"; };
+		C1FCE56E23CAFB3100DA0C57 /* EnterDetailsTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EnterDetailsTableCell.xib; sourceTree = "<group>"; };
+		C1FCE57623CB043C00DA0C57 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C1FCE57723CB043C00DA0C57 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		C1FCE57B23CB04C400DA0C57 /* EmployeesListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesListVC.swift; sourceTree = "<group>"; };
+		C1FCE57D23CB04F900DA0C57 /* AddEmployeeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEmployeeVC.swift; sourceTree = "<group>"; };
+		C1FCE57F23CB145A00DA0C57 /* EmployeeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTableCell.swift; sourceTree = "<group>"; };
+		C1FCE58023CB145A00DA0C57 /* EmployeeTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeTableCell.xib; sourceTree = "<group>"; };
+		C1FCE58423CB170F00DA0C57 /* UiViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiViewExtension.swift; sourceTree = "<group>"; };
+		C1FCE58623CB1ED100DA0C57 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
+		C1FCE58823CB1FF800DA0C57 /* EmployeeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeViewModel.swift; sourceTree = "<group>"; };
 		D46B96F80D43C2EAC9375B2F /* Pods-EmployeeAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmployeeAppUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EmployeeAppUITests/Pods-EmployeeAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,12 +150,12 @@
 			isa = PBXGroup;
 			children = (
 				C19AAE5623CAEE6F00538EF5 /* AppDelegate.swift */,
-				C19AAE5A23CAEE6F00538EF5 /* Main.storyboard */,
 				C19AAE8723CAF0B100538EF5 /* Models */,
 				C19AAE8823CAF0B100538EF5 /* ViewModels */,
 				C19AAE8923CAF0B100538EF5 /* Views */,
+				C1FCE58323CB16F800DA0C57 /* Extenions */,
+				C1C1AE4E23CB28B200F984FE /* Utilities */,
 				C19AAE6023CAEE7100538EF5 /* Assets.xcassets */,
-				C19AAE6223CAEE7100538EF5 /* LaunchScreen.storyboard */,
 				C19AAE6523CAEE7100538EF5 /* Info.plist */,
 				C19AAE5D23CAEE6F00538EF5 /* EmployeeApp.xcdatamodeld */,
 			);
@@ -145,6 +165,7 @@
 		C19AAE8723CAF0B100538EF5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C1FCE58623CB1ED100DA0C57 /* Employee.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -152,6 +173,7 @@
 		C19AAE8823CAF0B100538EF5 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				C1FCE58823CB1FF800DA0C57 /* EmployeeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -159,8 +181,57 @@
 		C19AAE8923CAF0B100538EF5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C1FCE57A23CB047300DA0C57 /* View Controllers */,
+				C1FCE57523CB043C00DA0C57 /* Storyboards */,
+				C1FCE56C23CAFAE300DA0C57 /* xibs */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		C1C1AE4E23CB28B200F984FE /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				C1C1AE4F23CB28BF00F984FE /* RxBus.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		C1FCE56C23CAFAE300DA0C57 /* xibs */ = {
+			isa = PBXGroup;
+			children = (
+				C1FCE56D23CAFB3100DA0C57 /* EnterDetailsTableCell.swift */,
+				C1FCE56E23CAFB3100DA0C57 /* EnterDetailsTableCell.xib */,
+				C1FCE57F23CB145A00DA0C57 /* EmployeeTableCell.swift */,
+				C1FCE58023CB145A00DA0C57 /* EmployeeTableCell.xib */,
+			);
+			path = xibs;
+			sourceTree = "<group>";
+		};
+		C1FCE57523CB043C00DA0C57 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				C1FCE57623CB043C00DA0C57 /* LaunchScreen.storyboard */,
+				C1FCE57723CB043C00DA0C57 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		C1FCE57A23CB047300DA0C57 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C1FCE57B23CB04C400DA0C57 /* EmployeesListVC.swift */,
+				C1FCE57D23CB04F900DA0C57 /* AddEmployeeVC.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		C1FCE58323CB16F800DA0C57 /* Extenions */ = {
+			isa = PBXGroup;
+			children = (
+				C1FCE58423CB170F00DA0C57 /* UiViewExtension.swift */,
+			);
+			name = Extenions;
+			path = Views/Extenions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,9 +342,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C19AAE6423CAEE7100538EF5 /* LaunchScreen.storyboard in Resources */,
+				C1FCE57823CB043C00DA0C57 /* LaunchScreen.storyboard in Resources */,
+				C1FCE58223CB145A00DA0C57 /* EmployeeTableCell.xib in Resources */,
 				C19AAE6123CAEE7100538EF5 /* Assets.xcassets in Resources */,
-				C19AAE5C23CAEE6F00538EF5 /* Main.storyboard in Resources */,
+				C1FCE57023CAFB3100DA0C57 /* EnterDetailsTableCell.xib in Resources */,
+				C1FCE57923CB043C00DA0C57 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,7 +464,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1FCE57C23CB04C400DA0C57 /* EmployeesListVC.swift in Sources */,
+				C1FCE58723CB1ED100DA0C57 /* Employee.swift in Sources */,
+				C1C1AE5023CB28BF00F984FE /* RxBus.swift in Sources */,
+				C1FCE58523CB171000DA0C57 /* UiViewExtension.swift in Sources */,
+				C1FCE56F23CAFB3100DA0C57 /* EnterDetailsTableCell.swift in Sources */,
+				C1FCE58923CB1FF800DA0C57 /* EmployeeViewModel.swift in Sources */,
+				C1FCE58123CB145A00DA0C57 /* EmployeeTableCell.swift in Sources */,
 				C19AAE5F23CAEE6F00538EF5 /* EmployeeApp.xcdatamodeld in Sources */,
+				C1FCE57E23CB04F900DA0C57 /* AddEmployeeVC.swift in Sources */,
 				C19AAE5723CAEE6F00538EF5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,25 +505,6 @@
 			targetProxy = C19AAE7623CAEE7100538EF5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		C19AAE5A23CAEE6F00538EF5 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C19AAE5B23CAEE6F00538EF5 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		C19AAE6223CAEE7100538EF5 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C19AAE6323CAEE7100538EF5 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C19AAE7C23CAEE7100538EF5 /* Debug */ = {

@@ -32,13 +32,25 @@ extension EnterDetailsTableCell {
         self.marriageStatusSwitch.isOn = false
     }
     
-    func setupCell(row: Int, marriageStatusTrue: Bool) {
+    func setupCell(row: Int, marriageStatusTrue: Bool, empInfo: [String: String]) {
         
         self.titleLabel.text = self.titleArr[row]
         self.enterTextField.placeholder = self.placeholderArr[row]
         self.marriageStatusSwitch.isHidden = row != 3
         self.enterTextField.isHidden = row != 3 ? false : marriageStatusTrue ? false : true
         self.marriageTextFieldHeight.constant = row != 3 ? 40 : marriageStatusTrue ? 40 : 0
+        
+        switch row {
+            
+        case 1:
+            self.enterTextField.text = empInfo["emailId"] ?? ""
+        case 2:
+            self.enterTextField.text = empInfo["city"] ?? ""
+        case 3:
+            self.enterTextField.text = empInfo["anniversary"] ?? ""
+        default:
+            self.enterTextField.text = empInfo["name"] ?? ""
+        }
     }
     
     func setupCellFor(city: String) {

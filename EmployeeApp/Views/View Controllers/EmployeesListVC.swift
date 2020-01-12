@@ -7,16 +7,23 @@
 //
 
 import UIKit
+import RxSwift
 
 class EmployeesListVC: UIViewController {
 
     @IBOutlet weak var employeeListTableView: UITableView!
+    
+    let disposeBag = DisposeBag()
+    var employeeVM = EmployeeViewModel()
+    var employeeList = [Employee]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.initialSetup()
     }
+    
+    
 }
 
 extension EmployeesListVC {
@@ -31,6 +38,38 @@ extension EmployeesListVC {
         self.employeeListTableView.tableFooterView = UIView()
         self.employeeListTableView.dataSource = self
         self.employeeListTableView.delegate = self
+        
+        self.observeViewModelChanges()
+    }
+    
+    fileprivate func observeViewModelChanges() {
+        
+        self.employeeVM.employees
+        .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
+        .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { (employees) in
+                
+                print("on Next\n")
+                print(employees)
+                
+            }, onError: { (error) in
+                print(error.localizedDescription)
+            }, onCompleted: nil, onDisposed: nil)
+        .disposed(by: self.disposeBag)
+        
+        RxBus.shared.empAdded
+            .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { (employee) in
+                
+                print("on Next\n")
+                print("employee added")
+                
+            }, onError: { (error) in
+                print(error.localizedDescription)
+            }, onCompleted: nil, onDisposed: nil)
+            .disposed(by: self.disposeBag)
+        
     }
     
     @objc fileprivate func addEmployee(_ sender: UIBarButtonItem) {
