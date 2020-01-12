@@ -1,0 +1,20 @@
+PODS:
+  - lottie-ios (3.1.5)
+  - RxSwift (5.0.1)
+
+DEPENDENCIES:
+  - lottie-ios
+  - RxSwift
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - lottie-ios
+    - RxSwift
+
+SPEC CHECKSUMS:
+  lottie-ios: 32bf84389337d86fbc8b12266e88452e0abf1dee
+  RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
+
+PODFILE CHECKSUM: 525bbb36ce3855f5d04a7e55ff90b58c0738bac0
+
+COCOAPODS: 1.5.3
